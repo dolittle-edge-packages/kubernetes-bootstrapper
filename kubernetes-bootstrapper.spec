@@ -1,10 +1,10 @@
 Name     : kubernetes-bootstrapper
-Version  : 1.0.0
+Version  : 1.0.1
 Release  : 1
 License  : MIT
 Summary  : Dolittle Edge Kubernetes automatic bootstrapper
 URL      : https://github.com/dolittle-edge-packages/kubernetes-bootstrapper
-Source0  : https://github.com/dolittle-edge-packages/kubernetes-bootstrapper/archive/1.0.0.tar.gz
+Source0  : https://github.com/dolittle-edge-packages/kubernetes-bootstrapper/archive/1.0.1.tar.gz
 
 %description
 
