@@ -1,0 +1,12 @@
+[connection]
+id=kubernetes
+type=bridge
+interface-name=kube0
+
+[ipv4]
+address1=10.146.1.1/16
+method=manual
+never-default=true
+
+[ipv6]
+method=ignore

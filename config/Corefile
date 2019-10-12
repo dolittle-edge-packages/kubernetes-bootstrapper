@@ -1,0 +1,19 @@
+.:53 {
+    bind 10.146.1.1
+    errors
+    health
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+        endpoint https://10.146.1.1:6443
+        kubeconfig /etc/coredns/kubeconfig.conf kubernetes-admin@kubernetes
+        pods insecure
+        upstream
+        fallthrough in-addr.arpa ip6.arpa
+        ttl 30
+    }
+    prometheus :9153
+    forward . /etc/resolv.conf
+    cache 30
+    loop
+    reload
+    loadbalance
+}

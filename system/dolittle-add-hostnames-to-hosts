@@ -1,0 +1,12 @@
+#!/bin/bash
+FILE="/etc/hosts"
+
+# Create default file if it does not exist
+if [ ! -f "$FILE" ]; then
+    echo -e "127.0.0.1\tlocalhost" > "$FILE"
+fi
+# Get original contents of file without entries for "127.0.1.1"
+CONTENTS=$(sed '/^127.0.1.1/d' "$FILE")
+
+# Append new entry for "127.0.1.1" to the end
+echo -e "$CONTENTS" "\n127.0.1.1\t$(hostname)" > "$FILE"

@@ -1,0 +1,11 @@
+[Unit]
+Description=Hostname resolution in /etc/hosts
+Before=kubelet.service
+
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/dolittle-add-hostnames-to-hosts
+
+[Install]
+WantedBy=multi-user.target

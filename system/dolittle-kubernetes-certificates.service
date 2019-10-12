@@ -1,0 +1,13 @@
+[Unit]
+Description=Kubernetes certificate bootstrapper
+Before=kubelet.service
+
+ConditionPathExists=!/etc/kubernetes
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/kubeadm init phase certs all --apiserver-advertise-address=10.146.1.1
+ExecStart=/usr/bin/kubeadm init phase kubeconfig all --apiserver-advertise-address=10.146.1.1
+
+[Install]
+WantedBy=multi-user.target

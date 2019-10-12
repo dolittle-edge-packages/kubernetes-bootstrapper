@@ -1,0 +1,101 @@
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+
+# Kubelet config
+failSwapOn: true
+enableControllerAttachDetach: true
+oomScoreAdj: -999
+enforceNodeAllocatable:
+- pods
+maxOpenFiles: 1000000
+configMapAndSecretChangeDetectionStrategy: Watch
+
+# Kubelet server
+address: 0.0.0.0
+port: 10250
+healthzBindAddress: 127.0.0.1
+healthzPort: 10248
+
+# Kubelet server authentication and authorization
+rotateCertificates: true
+authentication:
+  anonymous:
+    enabled: false
+  webhook:
+    cacheTTL: 2m0s
+    enabled: true
+  x509:
+    clientCAFile: /etc/kubernetes/pki/ca.crt
+authorization:
+  mode: Webhook
+  webhook:
+    cacheAuthorizedTTL: 5m0s
+    cacheUnauthorizedTTL: 30s
+
+# DNS Configuration
+clusterDomain: cluster.local
+clusterDNS:
+- 10.146.1.1
+resolvConf: /etc/resolv.conf
+
+# Kubelet config and state updates
+syncFrequency: 1m0s
+fileCheckFrequency: 20s
+httpCheckFrequency: 20s
+
+# Static pod configuration
+staticPodPath: /usr/lib/kubernetes/manifests
+
+# Container images
+registryPullQPS: 5
+registryBurst: 10
+serializeImagePulls: true
+imageMinimumGCAge: 2m0s
+imageGCHighThresholdPercent: 85
+imageGCLowThresholdPercent: 80
+
+# Pod configuration
+enableDebuggingHandlers: true
+maxPods: 110
+podPidsLimit: -1
+containerLogMaxFiles: 5
+containerLogMaxSize: 10Mi
+
+# Network setup setup
+makeIPTablesUtilChains: true
+iptablesDropBit: 15
+iptablesMasqueradeBit: 14
+hairpinMode: promiscuous-bridge
+
+# Limits of event creations
+eventRecordQPS: 5
+eventBurst: 10
+
+# API requests configuration
+streamingConnectionIdleTimeout: 4h0m0s
+runtimeRequestTimeout: 2m0s
+contentType: application/vnd.kubernetes.protobuf
+kubeAPIQPS: 5
+kubeAPIBurst: 10
+
+# Node configuration
+nodeStatusUpdateFrequency: 10s
+nodeStatusReportFrequency: 1m0s
+nodeLeaseDurationSeconds: 40
+cpuManagerPolicy: none
+cpuManagerReconcilePeriod: 10s
+cpuCFSQuota: true
+cpuCFSQuotaPeriod: 100ms
+evictionHard:
+  imagefs.available: 15%
+  memory.available: 100Mi
+  nodefs.available: 10%
+  nodefs.inodesFree: 5%
+evictionPressureTransitionPeriod: 5m0s
+
+# Volume stats
+volumeStatsAggPeriod: 1m0s
+
+# CGroup configuration
+cgroupsPerQOS: true
+cgroupDriver: cgroupfs
